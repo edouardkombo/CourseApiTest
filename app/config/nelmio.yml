@@ -1,0 +1,7 @@
+nelmio_api_doc:
+    name:                 'App API documentation'
+    sandbox:
+        body_format:
+            formats: [form, json, xml]
+            default_format: json
+
