@@ -89,53 +89,53 @@ HOW TO DO
 
 1. Create a database with specified credentials
 
-    mysql -u root -p
-    CREATE DATABASE test
+        mysql -u root -p
+        CREATE DATABASE test
 
 2. Go at the root of the project and install needed dependencies (Nelmio Api Doc, JMS Serializer Bundle, FOSUSerBundle, FOSRestBundle and Lexik JWT Authentication Bundle)
 
-    composer.phar install
-    chmod -R 777 var/cache && chmod -R 777 var/logs
+        composer.phar install
+        chmod -R 777 var/cache && chmod -R 777 var/logs
 
 Take a look at src/UserBundle/Entity and src/CourseBundle/Entity, both contains based fields of each tables with ManyToMany relations.
 
 
 3. Now, you can create the database schema
 
-    bin/console doctrine:schema:create
+        bin/console doctrine:schema:create
 
 
 4. Test database creation in mysql
 
-    mysql -u root -p
-    SHOW TABLES;
-    USE test;
-    DESCRIBE test;
+        mysql -u root -p
+        SHOW TABLES;
+        USE test;
+        DESCRIBE test;
 
 
 5. In order to use the api, we need to authenticate, I prefered Http token authentication which is multipurpose (Mobile, etc).
 So we need to create a user from FOSUserBundle, create a user with name "edouardo" and password "test".
 
-    bin/console fos:user:create
+        bin/console fos:user:create
 
 
 6. Test user creation in mysql
 
-    mysql -u root -p
-    use test;
-    SELECT * FROM user;
+        mysql -u root -p
+        use test;
+        SELECT * FROM user;
 
 
 7. Now, you have to get the http token by logging in (use any Rest client)
 
-    http://localhost/app_dev.php/api/login_check
+        http://localhost/app_dev.php/api/login_check
 
     Set as paramaters (username: edouardo, password: test) and carefully copy the token
 
 
 8. Get full list of Api urls and description
 
-    http://localhost/app_dev.php/course-api/doc
+        http://localhost/app_dev.php/course-api/doc
 
 
 9. Test the api
