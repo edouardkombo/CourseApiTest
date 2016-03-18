@@ -27,6 +27,7 @@ Bundles choosed:
 - FOSRestBundle => For Rest architecture management
 - JMSSerializerBundle => For Data queries serialization (json, xml)
 - NelmioApiDocBundle  => To generate a fast and readable documentation for the api
+- NelmioCorsBundle    => To enable cors requests on api
 - Lexik/JWT-Authentication-Bundle => To manage the http authentication by Token
 
 And that's all.
@@ -43,13 +44,21 @@ Clone the project from github
 APACHE CONF
 ===========
 
+Change the domain name by your domains
+
     <VirtualHost *:80>
         ServerName vps249035.ovh.net
         ServerAlias vps249035.ovh.net
 
+        SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+        SetEnvIf Origin "http?://?(vps249035.ovh.net|vps249035.ovh.net:82)$" AccessControlAllowOrigin=$0
+        Header always set Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
+        Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+        Header always set Access-Control-Allow-Headers "Origin, Accept, Authorization, Content-Type"
+
         RewriteEngine On
-        RewriteCond %{HTTP:Authorization} ^(.*)
-        RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+        RewriteCond %{REQUEST_METHOD} OPTIONS
+        RewriteRule ^(.*)$ $1 [R=200,L]
 
         DocumentRoot /var/www/psp/web
         <Directory /var/www/psp/web>
@@ -142,3 +151,5 @@ So we need to create a user from FOSUserBundle, create a user with name "edouard
 
     - Use any Rest client that accepts headers with Authorization parameter. You'll have to set in header "Authorization: Bearer __your_token__"
     - Or go here http://localhost/app_dev.php/course-api/doc, click on a method and on the sandbox submenu. Inside Headers, write "Authorization => Bearer __your_token__"
+
+    Api Urls are like this: http://localhost/app_dev.php/api/course || http://localhost/app_dev.php/api/user
