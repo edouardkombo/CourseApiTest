@@ -1,0 +1,23 @@
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: []
+        allow_headers: []
+        allow_methods: []
+        expose_headers: []
+        max_age: 0
+        hosts: []
+        origin_regex: false
+    paths:
+        '^/api/':
+            allow_origin: ['http://vps249035.ovh.net'] #Replace by your domain name and all the urls that will access your api
+            allow_headers: ['Origin', 'Authorization', 'X-Requested-With', 'Content-Type', 'Accept']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS']
+            max_age: 3600
+        '^/':
+            origin_regex: true
+            allow_origin: ['^http://vps249035.ovh.net*'] #Replace by all the urls that will access your api
+            allow_headers: ['Authorization', 'X-Requested-With', 'Content-Type', 'Accept', 'Origin', 'X-Custom-Auth', 'access-control-allow-credentials']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS']
+            max_age: 3600
+            hosts: ['^api\.']

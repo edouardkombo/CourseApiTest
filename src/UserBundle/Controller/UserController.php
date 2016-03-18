@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * User controller.
  *
- * @Route("/user")
+ * @Route("/api/user")
  */
 class UserController extends FOSRestController
 {

@@ -16,14 +16,14 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Course controller.
  *
- * @Route("/course")
+ * @Route("/api/course")
  */
 class CourseController extends FOSRestController
 {
     /**
      * Lists all Course entities.
      *
-     * @Rest\Get("/", name="app_api_courses")
+     * @Rest\Options("/", name="app_api_courses")
      *
      * @Rest\QueryParam(
      *     name="begin",

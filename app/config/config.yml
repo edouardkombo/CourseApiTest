@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: fos_rest.yml }
     - { resource: nelmio.yml }
+    - { resource: nelmio_cors.yml }
     - { resource: lexik.yml }
     - { resource: fos_user.yml }
     - { resource: "@UserBundle/Resources/config/services.yml" }
